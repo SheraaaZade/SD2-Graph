@@ -1,41 +1,51 @@
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class ListeDAdjacence extends Graph{
-	
-	private Map<Airport,Set<Flight>> outputFlights;
+public class ListeDAdjacence extends Graph {
 
-	public ListeDAdjacence(){
+	private Map<Airport, Set<Flight>> outputFlights;
+
+	public ListeDAdjacence() {
 		super();
-		outputFlights=new HashMap<Airport,Set<Flight>>();
+		outputFlights = new HashMap<Airport, Set<Flight>>();
 
 	}
 
 	@Override
-	// Complexité: ?
-	protected void ajouterSommet(Airport a) {	
-		//à compléter
-
+	// Complexitï¿½: o(1)
+	protected void ajouterSommet(Airport a) {
+		outputFlights.put(a, new HashSet<Flight>());
 	}
 
 	@Override
-	// Complexité: ?
+	// Complexitï¿½: o(1)
 	protected void ajouterArc(Flight f) {
-		//à compléter
+		outputFlights.get(f.getSource()).add(f);
 	}
 
 	@Override
-	// Complexité: ?
+	// Complexitï¿½: o(n)
 	public Set<Flight> arcsSortants(Airport a) {
-		//à compléter
+		for (Airport airport : outputFlights.keySet()) {
+			if (airport.equals(a))
+				return outputFlights.get(airport);
+		}
 		return null;
 	}
 
 	@Override
-	// Complexité: ?
+	// Complexitï¿½: ?
 	public boolean sontAdjacents(Airport a1, Airport a2) {
-		// à compléter
+		for (Flight flight : outputFlights.get(a1)) {
+			if (flight.getDestination().equals(a2))
+				return true;
+		}
+		for (Flight flight : outputFlights.get(a2)) {
+			if (flight.getDestination().equals(a1))
+				return true;
+		}
 		return false;
 	}
 
