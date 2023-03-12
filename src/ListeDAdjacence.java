@@ -10,7 +10,6 @@ public class ListeDAdjacence extends Graph {
 	public ListeDAdjacence() {
 		super();
 		outputFlights = new HashMap<Airport, Set<Flight>>();
-
 	}
 
 	@Override
